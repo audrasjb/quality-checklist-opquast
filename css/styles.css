@@ -1,0 +1,78 @@
+.site-health.tools_page_opquast .health-check-header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+.site-health.tools_page_opquast .notice.is-dismissible {
+	display: inline-block;
+	float: right;
+}
+.site-health.tools_page_opquast .health-check-header h1 {
+	margin-top: 1rem;
+}
+.site-health.tools_page_opquast .health-check-header h1 img {
+	width: 24px;
+	height: auto;
+}
+.site-health.tools_page_opquast .health-check-header h1 input.opquast-button {
+	position: absolute;
+	top: 1.5rem;
+	right: 2rem;
+}
+.site-health.tools_page_opquast .wp-header-end {
+	margin-bottom: 100px;
+}
+.opquast-stat-red {
+	color: #dc3232;
+}
+.opquast-stat-green {
+	color: #3b9b43;
+}
+.opquast-stat-blue {
+	color: #1981a0;
+}
+.opquast-stat-grey {
+	color: #777;
+}
+.site-health.tools_page_opquast fieldset.opquast-verification {
+	padding: 1em 0.5em;
+	background: #f5f5f5;
+}
+.site-health.tools_page_opquast fieldset.opquast-verification legend {
+	display: inline-block;
+	font-weight: bold;
+}
+.site-health.tools_page_opquast fieldset.opquast-verification input[type="radio"] {
+	margin-left: 2em;
+}
+.site-health.tools_page_opquast .badge {
+	white-space: nowrap;
+}
+.site-health.tools_page_opquast .badge.red {
+	border: 1px solid #dc3232;
+	color: #dc3232;
+	font-weight: normal;
+}
+.site-health.tools_page_opquast .badge.green {
+	border: 1px solid #3b9b43;
+	color: #3b9b43;
+	font-weight: normal;
+}
+.site-health.tools_page_opquast .badge.blue {
+	border: 1px solid #1981a0;
+	color: #1981a0;
+	font-weight: normal;
+}
+.site-health.tools_page_opquast .badge.grey {
+	border: 1px solid #777;
+	color: #777;
+	font-weight: normal;
+}
+.site-health.tools_page_opquast .opquast-tags .badge {
+	margin-right: .5rem;
+	padding: .1rem .5rem .15rem;
+	border: 1px solid #bfe7f3;
+	color: #32373c;
+	font-weight: 600;
+}
