@@ -21,13 +21,13 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 // Styles
-function opquast_admin_body_class( $classes ) {
+function qco_admin_body_class( $classes ) {
 	$classes .= ' site-health ';
 	return $classes;	
 }
-add_filter( 'admin_body_class', 'opquast_admin_body_class' );
+add_filter( 'admin_body_class', 'qco_admin_body_class' );
 
-function opquast_load_admin_styles( $hook ) {
+function qco_load_admin_styles( $hook ) {
 	if ( 'tools_page_opquast' === $hook ) {
 		wp_enqueue_style( 'site-health' );
 		wp_register_style( 'opquast-styles', plugin_dir_url( __FILE__ ) . '/css/styles.css' );
@@ -37,17 +37,17 @@ function opquast_load_admin_styles( $hook ) {
 		wp_enqueue_script( 'opquast-scripts' );
 	}
 }
-add_action( 'admin_enqueue_scripts', 'opquast_load_admin_styles' );
+add_action( 'admin_enqueue_scripts', 'qco_load_admin_styles' );
 
-function opquast_submenu_page() { 
-	add_submenu_page( 'tools.php', __( 'Checklist Opquast', 'quality-checklist-opquast' ), __( 'Checklist Opquast', 'quality-checklist-opquast' ), 'manage_options', 'opquast', 'opquast_submenu_page_callback' );
+function qco_submenu_page() { 
+	add_submenu_page( 'tools.php', esc_html__( 'Checklist Opquast', 'quality-checklist-opquast' ), esc_html__( 'Checklist Opquast', 'quality-checklist-opquast' ), 'manage_options', 'opquast', 'qco_submenu_page_callback' );
 }
-add_action( 'admin_menu', 'opquast_submenu_page' );
+add_action( 'admin_menu', 'qco_submenu_page' );
 
-function opquast_submenu_page_callback() {
+function qco_submenu_page_callback() {
 	?>
 	<form action="" method="post">
-		<input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'opquast_nonce' ) ?>">
+		<input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'qco_nonce' ) ?>">
 
 		<div class="health-check-header">
 			<div class="health-check-title-section">
@@ -62,14 +62,18 @@ function opquast_submenu_page_callback() {
 		<hr class="wp-header-end" />
 	
 		<div class="notice notice-error hide-if-js">
-			<p><?php _e( 'This screen requires JavaScript.', 'quality-checklist-opquast' ); ?></p>
+			<p><?php esc_html_e( 'This screen requires JavaScript.', 'quality-checklist-opquast' ); ?></p>
 		</div>
 
 			<?php
 			$current_criteria = get_option( 'opquast-checklist' );
 			if ( isset( $_POST ) && ! empty( $_POST ) ) {
-				if ( wp_verify_nonce( $_POST['nonce'], 'opquast_nonce' ) ) {
-					$current_criteria = $_POST['opquast-checklist'];
+				if ( wp_verify_nonce( $_POST['nonce'], 'qco_nonce' ) ) {
+					$received_criteria = $_POST['opquast-checklist'];
+					$current_criteria = array();
+					foreach ( $received_criteria as $key => $value ) {
+						$current_criteria[$key] = sanitize_text_field( $value );
+					}
 					update_option( 'opquast-checklist', $current_criteria );
 					?>
 					<div class="notice notice-success is-dismissible">
@@ -85,12 +89,12 @@ function opquast_submenu_page_callback() {
 				<h3 class="site-health-issue-count-title">Statut de la vérification Opquast</h3>
 
 				<div class="opquast-stats">
-					<?php display_opquast_stats(); ?>
+					<?php display_qco_stats(); ?>
 				</div>
 				
 			</div>
 	
-		<?php opquast_list_criteria( 'unverified', $current_criteria ); ?>
+		<?php qco_list_criteria( 'unverified', $current_criteria ); ?>
 	
 	</form>
 	<?php
@@ -99,58 +103,58 @@ function opquast_submenu_page_callback() {
 /*
  * Core functions
  */
-function opquast_get_criteria_from_json() {
+function qco_get_criteria_from_json() {
 	$get_json = file_get_contents( __DIR__ . '/data/data-fr.json' );
 	$criteria = json_decode( $get_json );
 	return $criteria;
 }
-function opquast_get_criteria_content_from_json() {
+function qco_get_criteria_content_from_json() {
 	$get_json = file_get_contents( __DIR__ . '/data/data-fr-content.json' );
 	$criteria_content = json_decode( $get_json );
 	return $criteria_content;
 }
 
-function opquast_get_thematiques_from_json() {
+function qco_get_thematiques_from_json() {
 	$get_json = file_get_contents( __DIR__ . '/data/data-fr-thematiques.json' );
 	$thematiques = json_decode( $get_json );
 	return $thematiques;
 }
 
-function display_opquast_stats() {
+function display_qco_stats() {
 	?>
 	<ul class="opquast-stats">
-	<?php if ( get_opquast_stats_count( 'ok' ) ) : ?>
+	<?php if ( get_qco_stats_count( 'ok' ) ) : ?>
 		<li>
 			<span class="dashicons dashicons-yes-alt opquast-stat-green"></span>
 			<?php 
-			$count_stat = get_opquast_stats_count( 'ok' );
+			$count_stat = get_qco_stats_count( 'ok' );
 			echo sprintf( _n( '%s critère conforme.', '%s critères conformes.', $count_stat, 'quality-checklist-opquast' ), $count_stat );
 			?>
 		</li>
 	<?php endif; ?>
-	<?php if ( get_opquast_stats_count( 'ko' ) ) : ?>
+	<?php if ( get_qco_stats_count( 'ko' ) ) : ?>
 		<li>
 			<span class="dashicons dashicons-warning opquast-stat-red"></span>
 			<?php 
-			$count_stat = get_opquast_stats_count( 'ko' );
+			$count_stat = get_qco_stats_count( 'ko' );
 			echo sprintf( _n( '%s critère non conforme.', '%s critères non conformes.', $count_stat, 'quality-checklist-opquast' ), $count_stat );
 			?>
 		</li>
 	<?php endif; ?>
-	<?php if ( get_opquast_stats_count( 'na' ) ) : ?>
+	<?php if ( get_qco_stats_count( 'na' ) ) : ?>
 		<li>
 			<span class="dashicons dashicons-dismiss opquast-stat-blue"></span>
 			<?php 
-			$count_stat = get_opquast_stats_count( 'na' );
+			$count_stat = get_qco_stats_count( 'na' );
 			echo sprintf( _n( '%s critère non applicable.', '%s critères non applicables.', $count_stat, 'quality-checklist-opquast' ), $count_stat );
 			?>
 		</li>
 	<?php endif; ?>
-	<?php if ( get_opquast_stats_count( 'nv' ) ) : ?>
+	<?php if ( get_qco_stats_count( 'nv' ) ) : ?>
 		<li>
 			<span class="dashicons dashicons-marker opquast-stat-grey"></span>
 			<?php 
-			$count_stat = get_opquast_stats_count( 'nv' );
+			$count_stat = get_qco_stats_count( 'nv' );
 			echo sprintf( _n( '%s critère non vérifié pour l’instant.', '%s critères non vérifiés pour l’instant.', $count_stat, 'quality-checklist-opquast' ), $count_stat );
 			?>
 		</li>
@@ -159,11 +163,11 @@ function display_opquast_stats() {
 	<?php
 }
 
-function get_opquast_stats_count( $status = '' ) {
+function get_qco_stats_count( $status = '' ) {
 	if ( empty( $status ) ) {
 		return;
 	}
-	$criteria = opquast_get_criteria_from_json(); 
+	$criteria = qco_get_criteria_from_json(); 
 	
 	$existing_criteria = array();
 	if ( ! empty( get_option( 'opquast-checklist' ) ) ) {
@@ -183,9 +187,9 @@ function get_opquast_stats_count( $status = '' ) {
 	}
 }
 
-function opquast_list_criteria( $verified = '', $current_criteria = array() ) {
-	$criteria = opquast_get_criteria_from_json(); 
-	$criteria_content = (array) opquast_get_criteria_content_from_json();
+function qco_list_criteria( $verified = '', $current_criteria = array() ) {
+	$criteria = qco_get_criteria_from_json(); 
+	$criteria_content = (array) qco_get_criteria_content_from_json();
 	$i = 0;
 	?>
 	<div class="site-health-issues-wrapper <?php // hidden ?>" id="health-check-issues-<?php echo $verified; ?>">
@@ -194,7 +198,7 @@ function opquast_list_criteria( $verified = '', $current_criteria = array() ) {
 		<p>
 			Filtrer par thématique :
 			<?php
-			$thematiques = opquast_get_thematiques_from_json();
+			$thematiques = qco_get_thematiques_from_json();
 			if ( $thematiques ) :
 				?>
 					<select id="opquast-filter-thematiques">
@@ -252,7 +256,7 @@ function opquast_list_criteria( $verified = '', $current_criteria = array() ) {
 		</h4>
 		<div id="health-check-accordion-block-<?php echo $i; ?>" class="health-check-accordion-panel" hidden="hidden">
 			<fieldset class="opquast-verification">
-				<legend>Statut :</legend>
+				<span>Statut :</span>
 				<input type="radio" name="opquast-checklist[<?php echo $item->id; ?>]" id="input-ok-<?php echo $item->id; ?>" value="ok" <?php checked( $current_criteria[$item->id], 'ok' ); ?> />
 				<label for="input-ok-<?php echo $item->id; ?>">Conforme</label>
 				
