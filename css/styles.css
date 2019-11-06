@@ -35,6 +35,9 @@
 .opquast-stat-grey {
 	color: #777;
 }
+.opquast-licence a .dashicons {
+	text-decoration: none;
+}
 .site-health.tools_page_opquast fieldset.opquast-verification {
 	padding: 1em 0.5em;
 	background: #f5f5f5;
