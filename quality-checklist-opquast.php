@@ -86,6 +86,7 @@ function qco_submenu_page_callback() {
 	
 		<div class="health-check-body hide-if-no-js">
 			<div class="site-status-has-issues">
+				<img class="logo-opquast" src="<?php echo plugin_dir_url( __FILE__ ); ?>/data/opquast-logo-full.png" alt="" />
 				<h3 class="site-health-issue-count-title">Statut de la vérification Opquast</h3>
 
 				<div class="opquast-stats">
@@ -161,7 +162,9 @@ function display_qco_stats() {
 	<?php endif; ?>
 	</ul>
 	<p class="opquast-licence">
-		Les bonnes pratiques et objectifs Opquast sont proposés sous licence <a href="https://creativecommons.org/licenses/by-sa/2.0/fr/" title="Creative Commons - Attribution - Partage dans les Mêmes Conditions (CC BY-SA 2.0 FR)" target="_blank" rel="noopener noreferrer">CC BY-SA <span class="screen-reader-text">(ce lien s'ouvre dans un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a> et les moyens de contrôle et de mise en œuvre sous licence <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/fr/" title="Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions (CC BY-NC-SA 2.0)" target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="screen-reader-text">(ce lien s'ouvre dans un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>.
+		Les bonnes pratiques Opquast sont proposées sous licence <a href="https://creativecommons.org/licenses/by-sa/2.0/fr/" title="Creative Commons - Attribution - Partage dans les Mêmes Conditions (CC BY-SA 2.0 FR)" target="_blank" rel="noopener noreferrer">CC BY-SA <span class="screen-reader-text">(ce lien s'ouvre dans un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
+		<br />
+		Les moyens de contrôle et de mise en œuvre sous licence <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/fr/" title="Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions (CC BY-NC-SA 2.0)" target="_blank" rel="noopener noreferrer">CC BY-NC-SA <span class="screen-reader-text">(ce lien s'ouvre dans un nouvel onglet)</span><span aria-hidden="true" class="dashicons dashicons-external"></span></a>
 	</p>
 	<p class="opquast-licence">
 		<a href="https://checklists.opquast.com/fr/" target="_blank" rel="noopener noreferrer">
