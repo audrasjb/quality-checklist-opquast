@@ -30,10 +30,10 @@ add_filter( 'admin_body_class', 'qco_admin_body_class' );
 function qco_load_admin_styles( $hook ) {
 	if ( 'tools_page_opquast' === $hook ) {
 		wp_enqueue_style( 'site-health' );
-		wp_register_style( 'opquast-styles', plugin_dir_url( __FILE__ ) . '/css/styles.css' );
+		wp_register_style( 'opquast-styles', plugin_dir_url( __FILE__ ) . '/css/opquast-styles.css' );
 		wp_enqueue_style( 'opquast-styles' );
 		wp_enqueue_script( 'site-health' );
-		wp_register_script( 'opquast-scripts', plugin_dir_url( __FILE__ ) . '/js/scripts.js', 'jquery' );
+		wp_register_script( 'opquast-scripts', plugin_dir_url( __FILE__ ) . '/js/opquast-scripts.js', 'jquery' );
 		wp_enqueue_script( 'opquast-scripts' );
 	}
 }
@@ -72,7 +72,7 @@ function qco_submenu_page_callback() {
 					$received_criteria = $_POST['opquast-checklist'];
 					$current_criteria = array();
 					foreach ( $received_criteria as $key => $value ) {
-						$current_criteria[$key] = sanitize_text_field( $value );
+						$current_criteria[intval($key)] = sanitize_text_field( $value );
 					}
 					update_option( 'opquast-checklist', $current_criteria );
 					?>
