@@ -3,7 +3,7 @@ Contributors: audrasjb, whodunitagency
 Donate link: https://www.paypal.me/audrasjb
 Tags: checklist, opquast, qualité, accessibilité, ergonomie, a11y
 Requires at least: 5.2
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.6
 Stable tag: 0.1
 License: GPLv2 or later
