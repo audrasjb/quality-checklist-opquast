@@ -22,7 +22,10 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Styles
 function qco_admin_body_class( $classes ) {
-	$classes .= ' site-health ';
+	$current_screen = get_current_screen();
+	if ( 'tools_page_opquast' === $current_screen->id ) {
+		$classes .= ' site-health ';
+	}
 	return $classes;	
 }
 add_filter( 'admin_body_class', 'qco_admin_body_class' );
