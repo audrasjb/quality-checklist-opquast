@@ -5,7 +5,7 @@ Tags: checklist, opquast, qualité, accessibilité, ergonomie, a11y
 Requires at least: 5.2
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

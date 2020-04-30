@@ -3,7 +3,7 @@
  * Plugin Name:       Quality Checklist Opquast
  * Plugin URI:        https://jeanbaptisteaudras.com/portfolio/wordpress-reading-progressbar-indicator-plugin/
  * Description:       Checklist qualité web Opquast pour WordPress
- * Version:           0.1
+ * Version:           0.2
  * Author:            audrasjb
  * Author URI:        https://jeanbaptisteaudras.com
  * License:           GPL-2.0+
