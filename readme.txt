@@ -36,6 +36,9 @@ Cette extension est pour l’instant uniquement disponible en français, les moy
 2. Détail d’un critère Opquast en changement de son status
 
 == Changelog ==
- 
+
+= 0.2 =
+Add site-health class only on plugin’s screen. Props @lriaudel
+
 = 0.1 =
 * Première version de l’extension sur WordPress.org !
